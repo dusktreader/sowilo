@@ -1,0 +1,42 @@
+#! /usr/bin/env python
+
+"""
+This program corrects right alignment of comments for code using trailing comments.
+"""
+
+import os
+import sys
+from optparse import OptionParser
+
+def comm_fix( file_name, comm_offset, comm_marker, backup, backup_ext ):
+    lines = open( file_name, 'r' ).readlines()
+    if backup:
+        os.rename( file_name, file_name+'.'+backup_ext )
+    nf = open( file_name, 'w' )
+    for line in lines:
+        elements = line.split( comm_marker )
+        code = elements[0]
+        code = code.rstrip()
+        padding = ' ' * ( comm_offset - len( code ) ) * len( elements[1:] )
+        nf.write( code )
+        nf.write( padding )
+        for comment in elements[1:]:
+            nf.write( comm_marker )
+            nf.write( comment.rstrip() )
+            nf.write( ' ' )
+        nf.write( '\n' )
+    nf.close()
+
+def main():
+    parser = OptionParser( usage="Usage: %prog [options] file1 file2..." )
+    parser.add_option( "-o", "--comm_offset", type="int", default=120, help="Specify line width offset for comments" )
+    parser.add_option( "-m", "--comm_marker", type="string", default='//', help="Specify comment marker (default=//)" )
+    parser.add_option( "-b", "--backup", action="store_true", help="Create backup files" )
+    parser.add_option( "-x", "--backup_ext", type="string", default='.old', help="Specify backup file extension" )
+    ( options, argv ) = parser.parse_args()
+
+    [ comm_fix( file, options.comm_offset, options.comm_marker, options.backup, options.backup_ext ) for file in argv ]
+    
+
+if __name__ == '__main__':
+    main()
