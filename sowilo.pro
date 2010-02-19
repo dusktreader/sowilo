@@ -3,25 +3,35 @@
 # -------------------------------------------------
 QT -= core \
     gui
-TARGET = Raytracer
+
+TARGET = sowilo
+
 CONFIG += console
+
 CONFIG -= app_bundle
+
 TEMPLATE = app
-DESTDIR = ./bin
+
+DESTDIR = bin
+
 LIBS += -L \
-    /usr/local/lib \
+     /usr/local/lib \
     -lcv \
     -lcxcore \
     -lhighgui
-INCLUDEPATH += /usr/local/include/opencv \
-    /home/d3x874/work/tools \
+
+INCLUDEPATH += \
+    /usr/local/include/opencv \
     rtmath \
     objects \
     objects/primitives \
     objects/luminaires \
     materials \
-    trajectories
-SOURCES += tools.cpp \
+    trajectories \
+    tools \
+
+SOURCES += \
+    tools/tools.cpp \
     main.cpp \
     scene.cpp \
     objects/object.cpp \
@@ -49,7 +59,8 @@ SOURCES += tools.cpp \
     orientation.cpp \
     trackingorientation.cpp \
 
-HEADERS += tools.h \
+HEADERS += \
+    tools/tools.h \
     scene.h \
     objects/object.h \
     objects/camera.h \
@@ -76,8 +87,7 @@ HEADERS += tools.h \
     orientation.h \
     trackingorientation.h \
 
+
 QMAKE_CXXFLAGS_RELEASE += -fopenmp
-QMAKE_LFLAGS_RELEASE += -fopenmp
-QMAKE_CXXFLAGS_DEBUG += -fopenmp \
-    -g
-QMAKE_LFLAGS_DEBUG += -fopenmp
+QMAKE_LFLAGS_RELEASE   += -fopenmp
+QMAKE_CXXFLAGS_DEBUG   += -g
