@@ -6,9 +6,10 @@
 
 #include <cmath>
 
-#include "trajectory.h"
-#include "object.h"
 #include "scene.h"
+#include "trajectory.h"
+#include "orientation.h"
+#include "object.h"
 #include "point.h"
 #include "vector.h"
 #include "ray.h"
@@ -31,7 +32,7 @@ protected:
 
 public:
     Camera();
-    Camera( const Scene* scn, const Trajectory* traj, Vector& e, Vector& u, int filmW, int filmH, double fovy );
+    Camera( const Scene* scn, const Trajectory* traj, const Orientation* ornt, Vector& e, Vector& u, int filmW, int filmH, double fovy );
     Ray spawnRay( double i, double j, double t );
     void render( double t, cv::Mat& img );
     void render( double t, std::string fileName );

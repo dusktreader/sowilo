@@ -11,7 +11,7 @@ private:
     Point  _c;
 public:
     Sphere();
-    Sphere( double r, const Material* mat, const Trajectory* traj );
+    Sphere( double r, const Material* mat, const Trajectory* traj, const Orientation* ornt );
     virtual ~Sphere(){}
     double R() const;
     virtual Vector n( const Point &q, double t ) const;

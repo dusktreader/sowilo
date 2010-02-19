@@ -5,6 +5,8 @@
 #include "point.h"
 #include "ray.h"
 #include "material.h"
+#include "trajectory.h"
+#include "orientation.h"
 
 class Material;
 
@@ -13,7 +15,7 @@ private:
     const Material* _mat;
 public:
     Primitive();
-    Primitive( const Material* mat, const Trajectory* traj );
+    Primitive( const Material* mat, const Trajectory* traj, const Orientation* ornt );
     virtual ~Primitive(){}
     void setMat( const Material* mat );
     const Material* mat() const;

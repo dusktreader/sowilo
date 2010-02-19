@@ -4,21 +4,21 @@ using namespace std;
 
 Camera::Camera() : Object(){}
 
-Camera::Camera( const Scene* scn, const Trajectory* traj, Vector& e, Vector& u, int filmW, int filmH, double fovy ) : Object(traj){
+Camera::Camera( const Scene* scn, const Trajectory* traj, const Orientation* ornt, Vector& e, Vector& u, int filmW, int filmH, double fovy ) : Object(traj,ornt){
     _scn = scn;
-    _e = e;
     _u = u;
     _filmW = filmW;
     _filmH = filmH;
     _fovy = fovy * PI / 180;
 
-    _z = -_e.u();
-    _x = _u.crossProduct( _z ).u();
-    _y = _z.crossProduct( _x ).u();
     _ZImg = _filmH / ( 2 * tan( _fovy / 2 ) );
 }
 
 Ray Camera::spawnRay( double i, double j, double t ){
+
+    _z = -d( t );
+    _x = _u.crossProduct( _z ).u();
+    _y = _z.crossProduct( _x ).u();
     double x = j - _filmW / 2,
            y = _filmH / 2 - i,
            z = -_ZImg;

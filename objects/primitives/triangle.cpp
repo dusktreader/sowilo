@@ -4,11 +4,12 @@ using namespace std;
 
 Triangle::Triangle() : Primitive(){}
 
-Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *traj ) : Primitive(mat,traj){
+Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *traj, const Orientation* ornt ) : Primitive(mat,traj,ornt){
     Vector v01 = ( p1 - p0 );
     Vector v02 = ( p2 - p0 );
-    _n = v01.crossProduct( v02 ).u();
-    calcRotateMat( _n, Vector(0,0,1), R );
+    Vector n = v01.crossProduct( v02 ).u();
+    vector<double> R;
+    calcRotateMat( n, Vector(0,0,1), R );
     rotateVect( v01, v01, R );
     rotateVect( v02, v02, R );
     _p0 = v01;
@@ -22,19 +23,23 @@ Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *
 }
 
 Vector Triangle::n( const Point &p, double t ) const{
-    return _n;
+    return d( t );
 }
 
 double Triangle::ix( const Ray &r ) const{
-    Vector d = r.o() - _traj->p( r.t0() );
-    rotateVect( d, d, R );
-    Point o = d;
-    rotateVect( r.d(), d, R );
-    double t = -o.z() / d.k();
+
+    vector<double> R;
+    calcRotateMat( n(), Vector(0,0,1), R );
+
+    Vector v = r.o() - _traj->p( r.t0() );
+    rotateVect( v, v, R );
+    Point o = v;
+    rotateVect( r.d(), v, R );
+    double t = -o.z() / v.k();
     if( t < EPS )
         return -1;
-    double x = o.x() + t * d.i();
-    double y = o.y() + t * d.j();
+    double x = o.x() + t * v.i();
+    double y = o.y() + t * v.j();
     double theta = atan( y / x );
     if( x < 0 )
         theta += PI;

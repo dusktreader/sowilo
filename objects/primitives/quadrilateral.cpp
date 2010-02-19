@@ -4,7 +4,7 @@ using namespace std;
 
 Quadrilateral::Quadrilateral() : Primitive(){}
 
-Quadrilateral::Quadrilateral( Point &p0, Point &p1, Point &p2, Point &p3, Material *mat, Trajectory *traj ) : Primitive(mat,traj){
+Quadrilateral::Quadrilateral( Point &p0, Point &p1, Point &p2, Point &p3, Material *mat, Trajectory *traj, const Orientation* ornt ) : Primitive(mat,traj,ornt){
     // assert co-planarity?
     A = Triangle( p0, p1, p2, mat, traj );
     B = Triangle( p0, p2, p3, mat, traj );
