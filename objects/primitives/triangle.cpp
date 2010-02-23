@@ -4,7 +4,7 @@ using namespace std;
 
 Triangle::Triangle() : Primitive(){}
 
-Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *traj, const Orientation* ornt ) : Primitive(mat,traj,ornt){
+Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *traj, Orientation* ornt ) : Primitive(mat,traj,ornt){
     Vector v01 = ( p1 - p0 );
     Vector v02 = ( p2 - p0 );
     Vector n = v01.crossProduct( v02 ).u();
@@ -29,7 +29,7 @@ Vector Triangle::n( const Point &p, double t ) const{
 double Triangle::ix( const Ray &r ) const{
 
     vector<double> R;
-    calcRotateMat( n(), Vector(0,0,1), R );
+    calcRotateMat( d( r.t0() ), Vector(0,0,1), R );
 
     Vector v = r.o() - _traj->p( r.t0() );
     rotateVect( v, v, R );

@@ -7,11 +7,11 @@
 
 class Object{
 protected:
-    const Trajectory* _traj;
-    const Orientation* _ornt;
+    Trajectory* _traj;
+    Orientation* _ornt;
 public:
     Object();
-    Object( const Trajectory* traj, const Orientation* ornt );
+    Object( Trajectory* traj, Orientation* ornt );
     Point p( double t ) const;
     Vector d( double t ) const;
 };

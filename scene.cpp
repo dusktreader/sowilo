@@ -9,7 +9,7 @@ Scene::Scene( double nRefr, Color &ambient, Color &background, int depthLim ){
     _depthLim = depthLim;
 }
 
-void Scene::addLuminaire( const Luminaire* lum ){
+void Scene::addLuminaire( Luminaire* lum ){
     luminaires.push_back( lum );
 }
 
@@ -20,7 +20,7 @@ const Luminaire* Scene::luminaire( int i ) const{
         return luminaires[i];
 }
 
-void Scene::addPrimitive( const Primitive* prim ){
+void Scene::addPrimitive( Primitive* prim ){
     primitives.push_back( prim );
 }
 

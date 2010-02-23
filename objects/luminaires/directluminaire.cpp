@@ -13,7 +13,7 @@ double DirectLuminaire::E( const Point &o, double  t ) const{
     return _E;
 }
 
-bool DirectLuminaire::S( const Scene* scn, const Point &o, double t ) const{
+bool DirectLuminaire::S( Scene* scn, const Point &o, double t ) const{
     Vector d = l( o, t );
     Point  dummyP;
     Vector dummyN;

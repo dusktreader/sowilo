@@ -22,8 +22,8 @@ private:
 
 public:
     Scene( double nRefr, Color &ambient, Color &background, int depthLim );
-    void addLuminaire( const Luminaire* lum  );
-    void addPrimitive( const Primitive* prim );
+    void addLuminaire( Luminaire* lum  );
+    void addPrimitive( Primitive* prim );
     //remove method for luminaire and primitive
     const Luminaire* luminaire( int i ) const;
     const Primitive* ix( const Ray &r, Point &p, Vector &n ) const;

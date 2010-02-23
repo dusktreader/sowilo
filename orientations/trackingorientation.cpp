@@ -5,7 +5,7 @@ TrackingOrientation::TrackingOrientation() : Orientation(){
     _traj1 = NULL;
 }
 
-TrackingOrientation::TrackingOrientation( Trajectory* traj0, Trajectory* traj1, const Vector& d0 ) : Orientation(d0){
+TrackingOrientation::TrackingOrientation( Trajectory* traj0, Trajectory* traj1 ) : Orientation(){
     _traj0 = traj0;
     _traj1 = traj1;
 }

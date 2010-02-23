@@ -10,7 +10,7 @@ private:
 
 public:
     TrackingOrientation();
-    TrackingOrientation( Trajectory* traj0, Trajectory* traj1, const Vector& d0 );
+    TrackingOrientation( Trajectory* traj0, Trajectory* traj1 );
 
     virtual Vector d( double t );
 };

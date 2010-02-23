@@ -13,7 +13,7 @@ GlossyMaterial::GlossyMaterial( double kSpec, double xSpec, double kDiff, double
     _kDiff = kDiff;
 }
 
-Color GlossyMaterial::lDirect( const Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const{
+Color GlossyMaterial::lDirect( Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const{
     Vector r = n.reflect( ry.e() );
     double E = lum->E( p, ry.t0() );
     Vector l = lum->l( p, ry.t0() );

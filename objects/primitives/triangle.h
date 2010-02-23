@@ -21,7 +21,7 @@ protected:
     std::vector<double> R;
 public:
     Triangle();
-    Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *traj, const Orientation* ornt );
+    Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *traj, Orientation* ornt );
     virtual ~Triangle(){}
 
     virtual Vector n( const Point &p, double t ) const;

@@ -4,7 +4,7 @@ using namespace std;
 
 Camera::Camera() : Object(){}
 
-Camera::Camera( const Scene* scn, const Trajectory* traj, const Orientation* ornt, Vector& e, Vector& u, int filmW, int filmH, double fovy ) : Object(traj,ornt){
+Camera::Camera( Scene* scn, Trajectory* traj, Orientation* ornt, Vector& u, int filmW, int filmH, double fovy ) : Object(traj,ornt){
     _scn = scn;
     _u = u;
     _filmW = filmW;

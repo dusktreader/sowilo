@@ -6,11 +6,11 @@ Primitive::Primitive() : Object(){
     _mat = NULL;
 }
 
-Primitive::Primitive( const Material* mat, const Trajectory* traj, const Orientation* ornt ) : Object(traj,ornt){
+Primitive::Primitive( Material* mat, Trajectory* traj, Orientation* ornt ) : Object(traj,ornt){
     _mat = mat;
 }
 
-void Primitive::setMat( const Material *mat ){
+void Primitive::setMat( Material *mat ){
     _mat = mat;
 }
 

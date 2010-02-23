@@ -28,6 +28,7 @@ INCLUDEPATH += \
     objects/luminaires \
     materials \
     trajectories \
+    orientations \
     tools \
 
 SOURCES += \
@@ -56,8 +57,8 @@ SOURCES += \
     trajectories/trajectory.cpp \
     trajectories/lineartrajectory.cpp \
     trajectories/circulartrajectory.cpp \
-    orientation.cpp \
-    trackingorientation.cpp \
+    orientations/orientation.cpp \
+    orientations/trackingorientation.cpp \
 
 HEADERS += \
     tools/tools.h \
@@ -84,8 +85,8 @@ HEADERS += \
     trajectories/trajectory.h \
     trajectories/lineartrajectory.h \
     trajectories/circulartrajectory.h \
-    orientation.h \
-    trackingorientation.h \
+    orientations/orientation.h \
+    orientations/trackingorientation.h \
 
 
 QMAKE_CXXFLAGS_RELEASE += -fopenmp

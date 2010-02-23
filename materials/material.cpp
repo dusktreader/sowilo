@@ -13,7 +13,7 @@ Material::Material( double kAmbi, const Color &shade ){
     _shade = shade;
 }
 
-Color Material::l( const Scene* scn, const Point& p, const Vector& n, const Ray& ry ) const{
+Color Material::l( Scene* scn, const Point& p, const Vector& n, const Ray& ry ) const{
     Color lI = lIndirect( scn, p, n, ry );
     Color lD;
     Color lA = lAmbient( scn );
@@ -30,14 +30,14 @@ Color Material::l( const Scene* scn, const Point& p, const Vector& n, const Ray&
     return ( lI + lD + lA ) * _shade;
 }
 
-Color Material::lAmbient( const Scene* scn ) const{
+Color Material::lAmbient( Scene* scn ) const{
     return scn->ambient() * _kAmbi;
 }
 
-Color Material::lIndirect( const Scene* scn, const Point &p, const Vector &n, const Ray& ry ) const{
+Color Material::lIndirect( Scene* scn, const Point &p, const Vector &n, const Ray& ry ) const{
     return Color();
 }
 
-Color Material::lDirect( const Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const{
+Color Material::lDirect( Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const{
     return Color();
 }

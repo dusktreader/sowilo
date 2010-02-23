@@ -6,7 +6,7 @@ Sphere::Sphere() : Primitive(){
     _R = 1.0;
 }
 
-Sphere::Sphere( double R, const Material* mat, const Trajectory* traj, const Orientation* ornt ) : Primitive(mat,traj,ornt){
+Sphere::Sphere( double R, Material* mat, Trajectory* traj, Orientation* ornt ) : Primitive(mat,traj,ornt){
     _R = R;
 }
 

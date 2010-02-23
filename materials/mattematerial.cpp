@@ -10,6 +10,6 @@ MatteMaterial::MatteMaterial( double kDiff, double kAmbi, const Color& shade ) :
     _kDiff = kDiff;
 }
 
-Color MatteMaterial::lDirect( const Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const{
+Color MatteMaterial::lDirect( Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const{
     return Color( 1.0, 1.0, 1.0 ) * _kDiff * n.dotProduct( lum->l( p, ry.t0() ) ) * lum->E( p, ry.t0() );
 }

@@ -6,7 +6,7 @@ Object::Object(){
 }
 
 /// @todo Add a time constraint t0, t1 where the object only exists in the scene within that time frame
-Object::Object( const Trajectory* traj, const Orientation* ornt ){
+Object::Object( Trajectory* traj, Orientation* ornt ){
     _traj = traj;
     _ornt = ornt;
 }

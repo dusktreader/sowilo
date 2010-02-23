@@ -32,7 +32,7 @@ protected:
 
 public:
     Camera();
-    Camera( const Scene* scn, const Trajectory* traj, const Orientation* ornt, Vector& e, Vector& u, int filmW, int filmH, double fovy );
+    Camera( Scene* scn, Trajectory* traj, Orientation* ornt, Vector& u, int filmW, int filmH, double fovy );
     Ray spawnRay( double i, double j, double t );
     void render( double t, cv::Mat& img );
     void render( double t, std::string fileName );

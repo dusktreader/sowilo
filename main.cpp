@@ -11,70 +11,86 @@
 #include "vector.h"
 #include "point.h"
 #include "trajectory.h"
+#include "trackingorientation.h"
 #include "lineartrajectory.h"
 #include "circulartrajectory.h"
 
 using namespace std;
 
-void testIntersection(){
-    Point  p0( 0.0, 0.0,  0.0 );
-    Point  p1( 3.0, 3.0,  0.0 );
-    Point  p2( -2.0, 4.0,  0.0 );
-    Trajectory traj( p0, 0.0 );
-    Material   mat;
-    Triangle tri( p0, p1, p2, &mat, &traj );
-
-    Vector d( 0.0, 0.0, -1.0 );
-    Point  o( 3.0, 3.0,  2.0 );
-    Ray    r( o, d, 0, 0.0, 0.0 );
-
-    double D = tri.ix( r );
-    //DB_REP_VAR( D );
-}
 void testRender(){
 
-    // Scene
-    double scn_nRefr = 1.0;
-    Color  scn_ambi = CLR_WHITE;
-    Color  scn_background = CLR_GRAY50;
-    int    scn_depthLim = 5;
-    Scene  scn( scn_nRefr, scn_ambi, scn_background, scn_depthLim );
+    // Generic Orientation
+    Orientation ornt;
 
-    // Material
-    double             mat_kDiff = 0.7;
-    double             mat_kAmbi = 0.2;
-    Color              mat_shade = CLR_RED;
-    MatteMaterial      mat( mat_kDiff, mat_kAmbi, mat_shade );
+    // ++Test Scene
+        double scn_nRefr = 1.0;
+        Color  scn_ambi = CLR_WHITE;
+        Color  scn_background = CLR_GRAY50;
+        int    scn_depthLim = 5;
+        Scene  scn( scn_nRefr, scn_ambi, scn_background, scn_depthLim );
+    // --Test Scene
 
-    // Trajectory
-    Point              traj_p0( 0.0, 0.0, -5.0 );
-    Vector             traj_n( 0.0, 0.0, 1.0 );
-    double             traj_V = 1.0;
-    double             traj_R = 1.0;
-    CircularTrajectory traj( traj_n, traj_R, traj_V, traj_p0 );
+    // ++Test Sphere
+        // Material
+        double             spr_mat_kRefl = 0.9;
+        double             spr_mat_kAmbi = 0.1;
+        Color              spr_mat_shade = CLR_GREEN;
+        MirrorMaterial     spr_mat( spr_mat_kRefl, spr_mat_kAmbi, spr_mat_shade );
 
-    // Primitive
-    Point              tri_p0( -1.0, -3.0, 0.0 );
-    Point              tri_p1( 2.0, 1.0, -5.0 );
-    Point              tri_p2( -3.0, 2.0, 0.0 );
-    Triangle           tri( tri_p0, tri_p1, tri_p2, &mat, &traj );
+        // Trajectory
+        Point              spr_traj_p0( 0.0, 0.0, -10.0 );
+        Trajectory         spr_traj( spr_traj_p0, 0.0 );
 
-    // Direct Luminaire
-    Vector             lum_l = Vector( 1.0, -3.0, -1.0 ).u();
-    double             lum_E = 0.8;
-    DirectLuminaire    lum( lum_l, lum_E );
 
-    // Camera
-    Point              cam_p0( 0.0, 0.0, 10.0 );
-    Vector             cam_e( 0, 0, -1.0 );
-    Vector             cam_u = Vector( 0.0, 1.0, 0.0 ).u();
-    Trajectory         cam_traj( cam_p0, 0.0 );
-    Camera             cam( &scn, &cam_traj, cam_e, cam_u, 256, 256, 45.0 );
+        // Primitive
+        double             spr_R = 2.0;
+        Sphere             spr( spr_R, &spr_mat, &spr_traj, &ornt );
+    // --Test Sphere
+
+    // ++Test Triangle
+        // Material
+        double              tri_mat_kDiff = 0.7;
+        double              tri_mat_kAmbi = 0.2;
+        Color               tri_mat_shade = CLR_RED;
+        MatteMaterial       tri_mat( tri_mat_kDiff, tri_mat_kAmbi, tri_mat_shade );
+
+        // Trajectory
+        Point               tri_traj_p0( 0.0, 0.0, -8.0 );
+        Vector              tri_traj_n( 0.0, 0.0, 1.0 );
+        double              tri_traj_V = 1.0;
+        double              tri_traj_R = 4.0;
+        CircularTrajectory  tri_traj( tri_traj_n, tri_traj_R, tri_traj_V, tri_traj_p0 );
+
+        // Orientation
+        TrackingOrientation tri_ornt( &tri_traj, &spr_traj );
+
+        // Primitive
+        Point               tri_p0( -1.0, -3.0, 0.0 );
+        Point               tri_p1( 2.0, 1.0, -5.0 );
+        Point               tri_p2( -3.0, 2.0, 0.0 );
+        Triangle            tri( tri_p0, tri_p1, tri_p2, &tri_mat, &tri_traj, &tri_ornt );
+    // --Test Triangle
+
+    // ++Test Luminaire
+        Vector             lum_l = Vector( 1.0, -3.0, -1.0 ).u();
+        double             lum_E = 0.8;
+        DirectLuminaire    lum( lum_l, lum_E );
+    // --Test Luminaire
+
+    // ++Test Camera
+        // Orientation
+        Orientation        cam_ornt( Vector( 0, 0, -1 ) );
+
+        Point              cam_p0( 0.0, 0.0, 10.0 );
+        Vector             cam_u = Vector( 0.0, 1.0, 0.0 ).u();
+        Trajectory         cam_traj( cam_p0, 0.0 );
+        Camera             cam( &scn, &cam_traj, &cam_ornt, cam_u, 256, 256, 45.0 );
+    // --Test Camera
 
     scn.addPrimitive( &tri );
+    scn.addPrimitive( &spr );
     scn.addLuminaire( &lum );
 
-    //cam.render( 0.0, "op.png" );
     cam.videoRender( 0, 2.0, 10, "op.avi" );
 }
 
@@ -83,27 +99,13 @@ int main(int argc, char *argv[])
     testRender();
     return 0;
 
-    // Scene
+    /*// Scene
     double scn_nRefr = 1.0;
     Color  scn_ambi = CLR_WHITE;
     Color  scn_background( 0.75, 0.75, 0.75 );
     int    scn_depthLim = 5;
     Scene  scn( scn_nRefr, scn_ambi, scn_background, scn_depthLim );
 
-    // Reflective Sphere
-    double             spr_mat_kRefl = 0.9;
-    double             spr_mat_kAmbi = 0.1;
-    Color              spr_mat_shade = CLR_WHITE;
-    MirrorMaterial     spr_mat( spr_mat_kRefl, spr_mat_kAmbi, spr_mat_shade );
-
-    Point              spr_traj_p0( 0.0, 0.0, -10.0 );
-    Vector             spr_traj_d(  0.0, 0.0, -1.0 );
-    double             spr_traj_V = 1.0;
-    //LinearTrajectory   spr_traj( spr_traj_d, spr_traj_V, spr_traj_p0 );
-    Trajectory         spr_traj( spr_traj_p0, 0.0 );
-
-    double             spr_R = 2.0;
-    Sphere             spr( spr_R, &spr_mat, &spr_traj );
 
     // Green Sphere
     double             spr2_mat_kSpec = 0.9;
@@ -165,6 +167,7 @@ int main(int argc, char *argv[])
     scn.addLuminaire( &lumP );
 
     cam.videoRender( 0, 15, 5, "op.avi");
+    */
 
 
 }

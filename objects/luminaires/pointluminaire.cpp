@@ -19,7 +19,7 @@ double PointLuminaire::E( const Point &o, double  t ) const{
     return _phi / ( 4 * PI * m * m );
 }
 
-bool PointLuminaire::S( const Scene* scn, const Point &o, double t ) const{
+bool PointLuminaire::S( Scene* scn, const Point &o, double t ) const{
     Point  pt = p(t);
     Vector d = pt - o;
     Point  q;
