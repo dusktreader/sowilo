@@ -16,8 +16,8 @@ private:
     double _nRefr;
     int _depthLim;
     Color _ambient;
-    std::vector<const Luminaire*> luminaires;
-    std::vector<const Primitive*> primitives;
+    std::vector<Luminaire*> luminaires;
+    std::vector<Primitive*> primitives;
     Color _background;
 
 public:
@@ -25,9 +25,9 @@ public:
     void addLuminaire( Luminaire* lum  );
     void addPrimitive( Primitive* prim );
     //remove method for luminaire and primitive
-    const Luminaire* luminaire( int i ) const;
-    const Primitive* ix( const Ray &r, Point &p, Vector &n ) const;
-    Color trace( Ray &r ) const;
+    Luminaire* luminaire( int i );
+    Primitive* ix( const Ray &r, Point &p, Vector &n );
+    Color trace( Ray &r );
     double nRefr() const;
     Color ambient() const;
 };

@@ -16,6 +16,6 @@
 
 class Vector;
 
-void calcRotateMat( const Vector& v, const Vector& w, std::vector<double>& R );
+void calcRotateMat( const Vector& v, const Vector& w, double R[] );
 
-void rotateVect( const Vector& v, Vector& w, const std::vector<double>& R, bool reversed=false );
+void rotateVect( const Vector& v, Vector& w, const double R[], bool reversed=false );

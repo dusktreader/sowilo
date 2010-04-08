@@ -22,8 +22,11 @@ public:
     Color( const Triple& other );
     virtual ~Color(){}
     double r() const;
+    int    R() const;
     double g() const;
+    int    G() const;
     double b() const;
+    int    B() const;
 
     virtual std::string str() const;
 };

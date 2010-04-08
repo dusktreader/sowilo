@@ -8,7 +8,6 @@ Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *
     Vector v01 = ( p1 - p0 );
     Vector v02 = ( p2 - p0 );
     Vector n = v01.crossProduct( v02 ).u();
-    vector<double> R;
     calcRotateMat( n, Vector(0,0,1), R );
     rotateVect( v01, v01, R );
     rotateVect( v02, v02, R );
@@ -22,13 +21,14 @@ Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *
     slope = ( _p0.y() - _p1.y() ) / ( _p0.x() - _p1.x() );
 }
 
-Vector Triangle::n( const Point &p, double t ) const{
+Vector Triangle::n( const Point &p, double t )
+{
     return d( t );
 }
 
-double Triangle::ix( const Ray &r ) const{
+double Triangle::ix( const Ray &r )
+{
 
-    vector<double> R;
     calcRotateMat( d( r.t0() ), Vector(0,0,1), R );
 
     Vector v = r.o() - _traj->p( r.t0() );

@@ -14,5 +14,5 @@ public:
     GlossyMaterial( double kSpec, double xSpec, double kDiff, double kAmbi, const Color& shade );
     virtual ~GlossyMaterial(){}
 
-    virtual Color lDirect( const Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const;
+    virtual Color lDirect( Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const;
 };

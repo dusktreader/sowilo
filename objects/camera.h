@@ -1,8 +1,7 @@
 #pragma once
 
-#include "cv.h"
-#include "cxcore.h"
-#include "highgui.h"
+#include <QImage>
+#include <QColor>
 
 #include <cmath>
 
@@ -16,7 +15,7 @@
 
 class Camera : public Object{
 protected:
-    const Scene* _scn;
+    Scene* _scn;
     Vector _e;
     Vector _u;
     int _filmW;
@@ -28,14 +27,13 @@ protected:
     Vector _y;
     double _ZImg;
 
-    cv::Mat_<cv::Vec3b> _img;
 
 public:
     Camera();
     Camera( Scene* scn, Trajectory* traj, Orientation* ornt, Vector& u, int filmW, int filmH, double fovy );
     Ray spawnRay( double i, double j, double t );
-    void render( double t, cv::Mat& img );
-    void render( double t, std::string fileName );
-    void videoRender( double t0, double t1, int fps, const std::string& fileName );
+    void render( double t, QImage& qimg );
+    void render( double t, const QString& fileName );
+    void videoRender( double t0, double t1, int fps, const QString& baseName, const QString& extension );
 };
 

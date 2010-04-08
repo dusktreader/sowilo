@@ -9,7 +9,6 @@
 #include <sstream>
 #include <iomanip>
 #include <exception>
-#include <omp.h>
 
 /** OS specific flags and etcetera */
 #ifdef WIN32
@@ -110,31 +109,6 @@ extern int callDepth;
 #define DB_REP_LIST( list, l ) { std::ostringstream op; \
                                  op << __FILE__ ":" << __LINE__ << " : "; \
                                  printList( list, l, #list, op ); \
-                                 cout << op.str() << flush; }
-/** Prints the file, line, and thread# */
-#define DB_REP_OMP               _Pragma( "omp critical" ){ \
-                                 std::ostringstream op; \
-                                 op << __FILE__ ":" << __LINE__ << ": "; \
-                                 op << "thread #" << omp_get_thread_num() << " reporting"; \
-                                 cout << op.str() << endl; }
-
-/** Prints the file, line, thread#, and a message
-  * @param  msg - The message to print
-  */
-#define DB_REP_OMP_MSG( msg )    _Pragma( "omp critical" ){ \
-                                 std::ostringstream op; \
-                                 op << __FILE__ ":" << __LINE__ << ":"; \
-                                 op << "thread #" << omp_get_thread_num() << ": message: " << msg; \
-                                 cout << op.str() << endl; }
-
-/** Prints the file, line, thread#, variable name, and variable value
-  * @param  var - The variable to report
-  */
-#define DB_REP_OMP_VAR( var )    _Pragma( "omp critical" ){ \
-                                 std::ostringstream op; \
-                                 op << __FILE__ ":" << __LINE__ << ": "; \
-                                 op << "thread #" << omp_get_thread_num() << ": "; \
-                                 printVar( var, #var, op ); \
                                  cout << op.str() << flush; }
 
 /** A custom exception that is thrown when a local ASSERT fails */

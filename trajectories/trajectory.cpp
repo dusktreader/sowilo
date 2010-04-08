@@ -9,7 +9,7 @@ Trajectory::Trajectory( const Point& p0, double V ){
     _p0 = p0;
 }
 
-Point Trajectory::p( double t ) const{
+Point Trajectory::p( double ) const{
     return _p0;
 }
 

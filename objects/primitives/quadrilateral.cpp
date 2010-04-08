@@ -10,11 +10,13 @@ Quadrilateral::Quadrilateral( Point &p0, Point &p1, Point &p2, Point &p3, Materi
     B = Triangle( p0, p2, p3, mat, traj, ornt );
 }
 
-Vector Quadrilateral::n( const Point &p, double t ) const{
+Vector Quadrilateral::n( const Point &p, double t )
+{
     return A.n( p, t );
 }
 
-double Quadrilateral::ix( const Ray &r ) const{
+double Quadrilateral::ix( const Ray &r )
+{
     double t = A.ix( r );
     if( t > EPS )
         return t;

@@ -11,5 +11,5 @@ public:
     MatteMaterial( double kDiff, double kAmbi, const Color& shade );
     virtual ~MatteMaterial(){}
 
-    virtual Color lDirect( const Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const;
+    virtual Color lDirect( Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const;
 };

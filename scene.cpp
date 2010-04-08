@@ -13,20 +13,24 @@ void Scene::addLuminaire( Luminaire* lum ){
     luminaires.push_back( lum );
 }
 
-const Luminaire* Scene::luminaire( int i ) const{
+Luminaire* Scene::luminaire( int i )
+{
+    Luminaire* lum;
     if( i<0 || i >= (int)luminaires.size() )
-        return NULL;
+        lum = NULL;
     else
-        return luminaires[i];
+        lum = luminaires[i];
+    return lum;
 }
 
 void Scene::addPrimitive( Primitive* prim ){
     primitives.push_back( prim );
 }
 
-const Primitive* Scene::ix( const Ray &r, Point &p, Vector &n  ) const{
+Primitive* Scene::ix( const Ray &r, Point &p, Vector &n  )
+{
     double D, DMin = DBL_MAX;
-    const Primitive* prim;
+    Primitive* prim;
     for( int i=0; i<(int)primitives.size(); i++ ){
         D = primitives[i]->ix( r );
         if( D > EPS && D < DMin ){
@@ -43,12 +47,13 @@ const Primitive* Scene::ix( const Ray &r, Point &p, Vector &n  ) const{
 }
 
 
-Color Scene::trace( Ray &r ) const{
+Color Scene::trace( Ray &r )
+{
     if( r.depth() > _depthLim )
         return Color();
     Point p;
     Vector n;
-    const Primitive* prim = ix( r, p, n );
+    Primitive* prim = ix( r, p, n );
     if( prim == NULL )
         return _background;
     else

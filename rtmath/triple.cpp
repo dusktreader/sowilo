@@ -3,14 +3,12 @@
 using namespace std;
 
 Triple::Triple(){
-    val = vector<double>( 3, 0.0 );
     val[0] = 0.0;
     val[1] = 0.0;
     val[2] = 0.0;
 }
 
 Triple::Triple( double v0, double v1, double v2 ){
-    val = vector<double>( 3, 0.0 );
     val[0] = v0;
     val[1] = v1;
     val[2] = v2;

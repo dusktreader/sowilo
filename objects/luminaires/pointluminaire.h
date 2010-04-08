@@ -12,8 +12,8 @@ private:
     double _phi;
 public:
     PointLuminaire();
-    PointLuminaire( double phi, Trajectory* traj );
+    PointLuminaire( double phi, Trajectory* traj, Orientation* ornt );
     virtual Vector l( const Point &o, double t ) const;
     virtual double E( const Point &o, double t ) const;
-    virtual bool   S( const Scene* scn, const Point &p, double t ) const;
+    virtual bool   S( Scene* scn, const Point &p, double t ) const;
 };

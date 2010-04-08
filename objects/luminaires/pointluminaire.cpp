@@ -6,7 +6,7 @@ PointLuminaire::PointLuminaire(){
     _phi = 0.0;
 }
 
-PointLuminaire::PointLuminaire( double phi, Trajectory* traj ) : Luminaire(traj){
+PointLuminaire::PointLuminaire( double phi, Trajectory* traj, Orientation* ornt ) : Luminaire(traj,ornt){
     _phi = phi;
 }
 

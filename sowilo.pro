@@ -1,7 +1,7 @@
 # -------------------------------------------------
 # Project created by QtCreator 2009-09-24T20:17:09
 # -------------------------------------------------
-QT -= core \
+QT += core \
     gui
 
 TARGET = sowilo
@@ -14,14 +14,7 @@ TEMPLATE = app
 
 DESTDIR = bin
 
-LIBS += -L \
-     /usr/local/lib \
-    -lcv \
-    -lcxcore \
-    -lhighgui
-
 INCLUDEPATH += \
-    /usr/local/include/opencv \
     rtmath \
     objects \
     objects/primitives \
@@ -32,8 +25,16 @@ INCLUDEPATH += \
     tools \
 
 SOURCES += \
+    #main.cpp \
+    camera_test.cpp \
+    #rtmath_test.cpp \
     tools/tools.cpp \
-    main.cpp \
+    rtmath/point.cpp \
+    rtmath/vector.cpp \
+    rtmath/triple.cpp \
+    rtmath/color.cpp \
+    rtmath/rtmath.cpp \
+    rtmath/ray.cpp \
     scene.cpp \
     objects/object.cpp \
     objects/camera.cpp \
@@ -44,12 +45,6 @@ SOURCES += \
     objects/luminaires/luminaire.cpp \
     objects/luminaires/directluminaire.cpp \
     objects/luminaires/pointluminaire.cpp \
-    rtmath/point.cpp \
-    rtmath/vector.cpp \
-    rtmath/ray.cpp \
-    rtmath/rtmath.cpp \
-    rtmath/triple.cpp \
-    rtmath/color.cpp \
     materials/material.cpp \
     materials/mattematerial.cpp \
     materials/glossymaterial.cpp \
@@ -62,6 +57,12 @@ SOURCES += \
 
 HEADERS += \
     tools/tools.h \
+    rtmath/triple.h \
+    rtmath/color.h \
+    rtmath/point.h \
+    rtmath/vector.h \
+    rtmath/ray.h \
+    rtmath/rtmath.h \
     scene.h \
     objects/object.h \
     objects/camera.h \
@@ -72,12 +73,6 @@ HEADERS += \
     objects/luminaires/luminaire.h \
     objects/luminaires/directluminaire.h \
     objects/luminaires/pointluminaire.h \
-    rtmath/point.h \
-    rtmath/vector.h \
-    rtmath/ray.h \
-    rtmath/rtmath.h \
-    rtmath/triple.h \
-    rtmath/color.h \
     materials/material.h \
     materials/mattematerial.h \
     materials/glossymaterial.h \
@@ -90,5 +85,4 @@ HEADERS += \
 
 
 QMAKE_CXXFLAGS_RELEASE += -fopenmp
-QMAKE_LFLAGS_RELEASE   += -fopenmp
-QMAKE_CXXFLAGS_DEBUG   += -g
+QMAKE_LFLAGS_RELEASE += -fopenmp

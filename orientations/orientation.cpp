@@ -11,7 +11,7 @@ Orientation::Orientation( const Vector& d0 ){
 }
 
 
-Vector Orientation::d( double t ){
+Vector Orientation::d( double ){
     return _d0;
 }
 

@@ -19,6 +19,6 @@ public:
     virtual ~Primitive(){}
     void setMat( Material* mat );
     const Material* mat() const;
-    virtual Vector n( const Point &p, double t ) const = 0;
-    virtual double ix( const Ray &r ) const = 0;
+    virtual Vector n( const Point &p, double t ) = 0;
+    virtual double ix( const Ray &r ) = 0;
 };

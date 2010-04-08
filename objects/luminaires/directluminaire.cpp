@@ -5,15 +5,15 @@ DirectLuminaire::DirectLuminaire( const Vector &l, double E ) : Luminaire(){
     _E = E;
 }
 
-Vector DirectLuminaire::l( const Point &o, double t ) const{
+Vector DirectLuminaire::l( const Point&, double ) const{
     return -_l.u();
 }
 
-double DirectLuminaire::E( const Point &o, double  t ) const{
+double DirectLuminaire::E( const Point&, double ) const{
     return _E;
 }
 
-bool DirectLuminaire::S( Scene* scn, const Point &o, double t ) const{
+bool DirectLuminaire::S( Scene* scn, const Point &o, double t ){
     Vector d = l( o, t );
     Point  dummyP;
     Vector dummyN;

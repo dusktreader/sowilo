@@ -4,7 +4,9 @@ using namespace std;
 
 Camera::Camera() : Object(){}
 
-Camera::Camera( Scene* scn, Trajectory* traj, Orientation* ornt, Vector& u, int filmW, int filmH, double fovy ) : Object(traj,ornt){
+Camera::Camera( Scene* scn, Trajectory* traj, Orientation* ornt, Vector& u, int filmW, int filmH, double fovy ) :
+Object(traj,ornt)
+{
     _scn = scn;
     _u = u;
     _filmW = filmW;
@@ -14,7 +16,8 @@ Camera::Camera( Scene* scn, Trajectory* traj, Orientation* ornt, Vector& u, int 
     _ZImg = _filmH / ( 2 * tan( _fovy / 2 ) );
 }
 
-Ray Camera::spawnRay( double i, double j, double t ){
+Ray Camera::spawnRay( double i, double j, double t )
+{
 
     _z = -d( t );
     _x = _u.crossProduct( _z ).u();
@@ -26,9 +29,9 @@ Ray Camera::spawnRay( double i, double j, double t ){
     return Ray( this->p(t), dWorld, 0, _scn->nRefr(), t );
 }
 
-void Camera::render( double t, cv::Mat& img ){
-    _img = cv::Mat_<cv::Vec3b>( cv::Size(_filmW,_filmH), cv::Vec3b(0,0,0) );
-    img = _img;
+void Camera::render( double t, QImage& qimg )
+{
+    qimg = QImage( _filmW, _filmH, QImage::Format_RGB888 );
     Color c;
     Ray r;
     #pragma omp parallel for private( c,r )
@@ -36,35 +39,28 @@ void Camera::render( double t, cv::Mat& img ){
         for( int j=0; j<_filmW; j++ ){
             r = spawnRay( i + 0.5, j + 0.5, t );
             c = _scn->trace( r );
-            uchar r = (uchar)( min( 1.0, c.r() ) * 255 );
-            uchar g = (uchar)( min( 1.0, c.g() ) * 255 );
-            uchar b = (uchar)( min( 1.0, c.b() ) * 255 );
-            _img( i, j ) = cv::Vec3b( b, g, r );
+            QColor qc( c.R(), c.G(), c.B() );
+            qimg.setPixel( j, i, qc.rgb() );
         }
     }
 }
 
-void Camera::render( double t, std::string fileName ){
-    cv::Mat img;
-    render( t, img );
-    cv::imwrite( fileName, img );
+void Camera::render( double t, const QString& fileName )
+{
+    QImage qimg;
+    render( t, qimg );
+    qimg.save( fileName );
 }
 
-void Camera::videoRender( double t0, double t1, int fps, const string& fileName ){
+void Camera::videoRender( double t0, double t1, int fps, const QString& baseName, const QString& extension )
+{
     ASSERT( t1 > t0 );
     double dt = 1.0 / fps;
     double T = (int)( ( t1 - t0 ) / dt );
-    /*cv::VideoWriter recorder( fileName, CV_FOURCC('I','Y','U','V'), fps, cv::Size(_filmW,_filmH) );
-    if( !recorder.isOpened() ){
-        DB_REP;
-        return;
-    }*/
-    cv::Mat frame;
     int i=0;
-    for( double t=t0; t<t1; t+=dt ){
+    for( double t=t0; t<t1; t+=dt )
+    {
         cout << "rendering frame " << i++ << " of " << T << endl;
-        render( t, frame );
-        cv::imwrite( "op/"+num2str(t)+".png", frame );
-        //recorder << frame;
+        render( t, baseName + QString::number( t, 'f', 3 ) + extension );
     }
 }

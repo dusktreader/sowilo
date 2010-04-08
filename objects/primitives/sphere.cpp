@@ -14,11 +14,13 @@ double Sphere::R() const{
     return _R;
 }
 
-Vector Sphere::n( const Point &q, double t ) const{
+Vector Sphere::n( const Point &q, double t )
+{
     return ( q - p( t )  ).u();
 }
 
-double Sphere::ix( const Ray &r ) const{
+double Sphere::ix( const Ray &r )
+{
     Point c = p( r.t0() );
     Vector oc = ( r.o() - c );
     double B = 2.0 * r.d().dotProduct( oc );

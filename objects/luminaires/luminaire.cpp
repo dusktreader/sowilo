@@ -2,5 +2,5 @@
 
 Luminaire::Luminaire() : Object(){}
 
-Luminaire::Luminaire( Trajectory* traj ) : Object(traj){}
+Luminaire::Luminaire( Trajectory* traj, Orientation* ornt ) : Object(traj,ornt){}
 

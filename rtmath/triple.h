@@ -1,13 +1,11 @@
 #pragma once
 
-#include <vector>
-
 #include "tools.h"
 
 
 class Triple{
 protected:
-    std::vector<double> val;
+    double val[3];
 public:
     Triple();
     Triple( double v0, double v1, double v2 );

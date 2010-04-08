@@ -12,11 +12,11 @@ class Luminaire : public Object{
 protected:
 public:
     Luminaire();
-    Luminaire( const Trajectory* traj );
+    Luminaire( Trajectory* traj, Orientation* ornt );
     virtual ~Luminaire(){}
     virtual Vector l( const Point &p, double t ) const = 0;
     virtual double E( const Point &p, double t ) const = 0;
-    virtual bool   S( const Scene* scn, const Point &p, double t ) const = 0;
+    virtual bool   S( Scene* scn, const Point &p, double t ) = 0;
 };
 
 // It might be cool to have an on/off switch and some sort of fade factor so that after toggling, the light

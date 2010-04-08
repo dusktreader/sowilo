@@ -12,6 +12,6 @@ public:
     Quadrilateral();
     Quadrilateral( Point &p0, Point &p1, Point &p2, Point &p3, Material* mat, Trajectory *traj, Orientation* ornt );
 
-    virtual Vector n( const Point &p, double t ) const;
-    virtual double ix( const Ray &r ) const;
+    virtual Vector n( const Point &p, double t );
+    virtual double ix( const Ray &r );
 };

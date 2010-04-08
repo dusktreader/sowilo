@@ -14,8 +14,8 @@ public:
     Sphere( double r, Material* mat, Trajectory* traj, Orientation* ornt );
     virtual ~Sphere(){}
     double R() const;
-    virtual Vector n( const Point &q, double t ) const;
-    virtual double ix( const Ray &r ) const;
+    virtual Vector n( const Point &q, double t );
+    virtual double ix( const Ray &r );
 
 };
 
