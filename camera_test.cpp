@@ -67,5 +67,5 @@ int main(){
     scn.addPrimitive( &spr );
     scn.addLuminaire( &lum );
 
-    cam.videoRender( 0, 10, 12, "/data/op-vid", ".png" );
+    cam.videoRender( 0, 10, 12, "output/op-vid", ".png" );
 }
