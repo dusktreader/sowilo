@@ -20,3 +20,4 @@ Vector Object::d( double t ) const{
     ASSERT( _ornt != NULL );
     return _ornt->d( t );
 }
+
