@@ -31,9 +31,10 @@ protected:
 public:
     Camera();
     Camera( Scene* scn, Trajectory* traj, Orientation* ornt, Vector& u, int filmW, int filmH, double fovy );
+    virtual ~Camera(){}
     Ray spawnRay( double i, double j, double t );
     void render( double t, QImage& qimg );
-    void render( double t, const QString& fileName );
+    virtual void render( double t, const QString& fileName );
     void videoRender( double t0, double t1, int fps, const QString& baseName, const QString& extension );
 };
 

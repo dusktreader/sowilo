@@ -3,31 +3,22 @@
 # -------------------------------------------------
 QT += core \
     gui
-
 TARGET = sowilo
-
 CONFIG += console
-
 CONFIG -= app_bundle
-
 TEMPLATE = app
-
 DESTDIR = bin
-
-INCLUDEPATH += \
-    rtmath \
+INCLUDEPATH += rtmath \
     objects \
     objects/primitives \
     objects/luminaires \
     materials \
     trajectories \
     orientations \
-    tools \
+    tools
 
-SOURCES += \
-    #main.cpp \
-    camera_test.cpp \
-    #rtmath_test.cpp \
+# main.cpp \
+SOURCES += camera_test.cpp \ # rtmath_test.cpp \
     tools/tools.cpp \
     rtmath/point.cpp \
     rtmath/vector.cpp \
@@ -54,9 +45,9 @@ SOURCES += \
     trajectories/circulartrajectory.cpp \
     orientations/orientation.cpp \
     orientations/trackingorientation.cpp \
-
-HEADERS += \
-    tools/tools.h \
+    futurescene.cpp \
+    objects/futurecamera.cpp
+HEADERS += tools/tools.h \
     rtmath/triple.h \
     rtmath/color.h \
     rtmath/point.h \
@@ -82,7 +73,7 @@ HEADERS += \
     trajectories/circulartrajectory.h \
     orientations/orientation.h \
     orientations/trackingorientation.h \
-
-
+    futurescene.h \
+    objects/futurecamera.h
 QMAKE_CXXFLAGS_RELEASE += -fopenmp
 QMAKE_LFLAGS_RELEASE += -fopenmp

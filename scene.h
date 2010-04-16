@@ -26,8 +26,8 @@ public:
     void addPrimitive( Primitive* prim );
     //remove method for luminaire and primitive
     Luminaire* luminaire( int i );
-    Primitive* ix( const Ray &r, Point &p, Vector &n );
-    Color trace( Ray &r );
+    virtual Primitive* ix( const Ray &r, Point &p, Vector &n );
+    virtual Color trace( Ray &r );
     double nRefr() const;
     Color ambient() const;
 };
