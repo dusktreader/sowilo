@@ -9,7 +9,7 @@ protected:
 public:
     DirectLuminaire( const Vector &l, double E );
     virtual ~DirectLuminaire(){}
-    virtual Vector l( const Point& o, double t ) const;
-    virtual double E( const Point& o, double t ) const;
+    virtual Vector l( const Point& o, double t );
+    virtual double E( const Point& o, double t );
     virtual bool   S( Scene* scn, const Point &p, double t );
 };

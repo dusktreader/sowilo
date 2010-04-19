@@ -5,11 +5,11 @@ DirectLuminaire::DirectLuminaire( const Vector &l, double E ) : Luminaire(){
     _E = E;
 }
 
-Vector DirectLuminaire::l( const Point&, double ) const{
+Vector DirectLuminaire::l( const Point&, double ){
     return -_l.u();
 }
 
-double DirectLuminaire::E( const Point&, double ) const{
+double DirectLuminaire::E( const Point&, double ){
     return _E;
 }
 
