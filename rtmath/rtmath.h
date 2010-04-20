@@ -19,3 +19,5 @@ class Vector;
 void calcRotateMat( const Vector& v, const Vector& w, double R[] );
 
 void rotateVect( const Vector& v, Vector& w, const double R[], bool reversed=false );
+
+double fresnel( const Vector& e, const Vector& n, double nRefrI, double nRefrT );

@@ -14,8 +14,8 @@ public:
     Luminaire();
     Luminaire( Trajectory* traj, Orientation* ornt );
     virtual ~Luminaire(){}
-    virtual Vector l( const Point &p, double t ) const = 0;
-    virtual double E( const Point &p, double t ) const = 0;
+    virtual Vector l( const Point &p, double t ) = 0;
+    virtual double E( const Point &p, double t ) = 0;
     virtual bool   S( Scene* scn, const Point &p, double t ) = 0;
 };
 

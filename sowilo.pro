@@ -39,14 +39,13 @@ SOURCES += camera_test.cpp \ # rtmath_test.cpp \
     materials/material.cpp \
     materials/mattematerial.cpp \
     materials/glossymaterial.cpp \
+    materials/glassymaterial.cpp \
     materials/mirrormaterial.cpp \
     trajectories/trajectory.cpp \
     trajectories/lineartrajectory.cpp \
     trajectories/circulartrajectory.cpp \
     orientations/orientation.cpp \
-    orientations/trackingorientation.cpp \
-    futurescene.cpp \
-    objects/futurecamera.cpp
+    orientations/trackingorientation.cpp
 HEADERS += tools/tools.h \
     rtmath/triple.h \
     rtmath/color.h \
@@ -67,13 +66,12 @@ HEADERS += tools/tools.h \
     materials/material.h \
     materials/mattematerial.h \
     materials/glossymaterial.h \
+    materials/glassymaterial.h \
     materials/mirrormaterial.h \
     trajectories/trajectory.h \
     trajectories/lineartrajectory.h \
     trajectories/circulartrajectory.h \
     orientations/orientation.h \
-    orientations/trackingorientation.h \
-    futurescene.h \
-    objects/futurecamera.h
+    orientations/trackingorientation.h
 QMAKE_CXXFLAGS_RELEASE += -fopenmp
 QMAKE_LFLAGS_RELEASE += -fopenmp

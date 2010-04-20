@@ -21,7 +21,7 @@ Triangle::Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *
     slope = ( _p0.y() - _p1.y() ) / ( _p0.x() - _p1.x() );
 }
 
-Vector Triangle::n( const Point &p, double t )
+Vector Triangle::n( const Point&, double t )
 {
     return d( t );
 }

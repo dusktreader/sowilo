@@ -24,6 +24,7 @@ public:
     Vector u() const;
 
     Vector reflect( const Vector& other ) const;
+    Vector refract( const Vector& other, double nRefrI, double nRefrT ) const;
 
     virtual std::string str() const;
 

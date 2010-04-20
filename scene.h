@@ -12,7 +12,7 @@
 class Primitive;
 
 class Scene{
-private:
+protected:
     double _nRefr;
     int _depthLim;
     Color _ambient;
