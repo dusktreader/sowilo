@@ -1,5 +1,7 @@
 #include "glassymaterial.h"
 
+using namespace std;
+
 GlassyMaterial::GlassyMaterial() : Material()
 {
     _kRefr = 1.0;
@@ -15,7 +17,8 @@ GlassyMaterial::GlassyMaterial( double kRefr, double nRefr, double kAmbi, const 
 Color GlassyMaterial::lIndirect( Scene *scn, const Point &p, const Vector &n, const Ray& ry ) const
 {
     double en = ry.e().dotProduct( n );
-    Ray ryRefl( p, n.reflect( ry.e() ), ry.depth() + 1, ry.nRefr(), ry.t0() );
+    Vector dRefl = reflect( n, ry.e() );
+    Ray ryRefl( p, dRefl, ry.depth() + 1, ry.nRefr(), ry.t0() );
     double nRefrI, nRefrT;
     Vector nI;
     if( en < 0.0 )
@@ -30,7 +33,7 @@ Color GlassyMaterial::lIndirect( Scene *scn, const Point &p, const Vector &n, co
         nRefrT = _nRefr;
         nI = n;
     }
-    Vector dRefr = nI.refract( ry.e(), nRefrI, nRefrT );
+    Vector dRefr = refract( nI, ry.e(), nRefrI, nRefrT );
     double f = fresnel( ry.e(), nI, nRefrI, nRefrT );
     Color lRefl, lRefr;
     if( dRefr.m() < EPS )

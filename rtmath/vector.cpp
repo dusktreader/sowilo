@@ -45,30 +45,6 @@ Vector Vector::u() const
     return Vector( *this / ( m() ) );
 }
 
-Vector Vector::reflect( const Vector& other ) const
-{
-    Vector np = *this * 2 * this->dotProduct( other ) - other;
-    return np.u();
-}
-
-Vector Vector::refract( const Vector &other, double nRefrI, double nRefrT ) const
-{
-    double eta = nRefrI / nRefrT;
-    double en = this->dotProduct( other );
-    double tmp = 1 - en * en;
-    if( tmp <= 0.0 )
-    {
-        return Vector();
-    }
-    tmp = 1 - pow( eta * sqrt( tmp ), 2.0 );
-    if( tmp <= 0.0 )
-    {
-        return Vector();
-    }
-    Vector d = ( *this * en ) * eta - *this * sqrt( tmp );
-    return d.u();
-}
-
 string Vector::str() const
 {
     return "< " + num2str(i()) + ", " + num2str(j()) + ", " +num2str(k()) + " >";

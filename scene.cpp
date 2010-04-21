@@ -30,7 +30,7 @@ void Scene::addPrimitive( Primitive* prim ){
 Primitive* Scene::ix( const Ray &r, Point &p, Vector &n  )
 {
     double D, DMin = DBL_MAX;
-    Primitive* prim;
+    Primitive* prim = NULL;
     for( int i=0; i<(int)primitives.size(); i++ ){
         D = primitives[i]->ix( r );
         if( D > EPS && D < DMin ){

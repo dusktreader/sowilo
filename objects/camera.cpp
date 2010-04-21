@@ -34,9 +34,12 @@ void Camera::render( double t, QImage& qimg )
     qimg = QImage( _filmW, _filmH, QImage::Format_RGB888 );
     Color c;
     Ray r;
+
     #pragma omp parallel for private( c,r )
-    for( int i=0; i<_filmH; i++ ){
-        for( int j=0; j<_filmW; j++ ){
+    for( int i=0; i<_filmH; i++ )
+    {
+        for( int j=0; j<_filmW; j++ )
+        {
             r = spawnRay( i + 0.5, j + 0.5, t );
             c = _scn->trace( r );
             QColor qc( c.R(), c.G(), c.B() );

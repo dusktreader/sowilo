@@ -14,7 +14,7 @@ GlossyMaterial::GlossyMaterial( double kSpec, double xSpec, double kDiff, double
 }
 
 Color GlossyMaterial::lDirect( Luminaire* lum, const Point &p, const Vector &n, const Ray& ry ) const{
-    Vector r = n.reflect( ry.e() );
+    Vector r = reflect( n, ry.e() );
     double E = lum->E( p, ry.t0() );
     Vector l = lum->l( p, ry.t0() );
     double lDiff = E * _kDiff * n.dotProduct( l );

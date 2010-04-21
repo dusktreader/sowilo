@@ -22,6 +22,7 @@ protected:
 
 public:
     Scene( double nRefr, Color &ambient, Color &background, int depthLim );
+    virtual ~Scene(){}
     void addLuminaire( Luminaire* lum  );
     void addPrimitive( Primitive* prim );
     //remove method for luminaire and primitive
