@@ -14,6 +14,6 @@ protected:
     double _R;
 public:
     CircularTrajectory();
-    CircularTrajectory( Vector&n, double R, double V, Point& p0 );
+    CircularTrajectory( const Vector&n, double R, double V, const Point& p0, double t0 );
     virtual Point p( double t ) const;
 };

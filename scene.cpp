@@ -33,6 +33,7 @@ Primitive* Scene::ix( const Ray &r, Point &p, Vector &n  )
     Primitive* prim = NULL;
     for( int i=0; i<(int)primitives.size(); i++ ){
         D = primitives[i]->ix( r );
+
         if( D > EPS && D < DMin ){
             DMin = D;
             prim = primitives[i];

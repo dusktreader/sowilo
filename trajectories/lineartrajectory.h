@@ -10,6 +10,6 @@ protected:
     Vector _d;
 public:
     LinearTrajectory();
-    LinearTrajectory( Vector& d, double V, Point& p0 );
+    LinearTrajectory( Vector& d, double V, Point& p0, double t0 );
     virtual Point p( double t ) const;
 };

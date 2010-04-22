@@ -6,7 +6,7 @@ CircularTrajectory::CircularTrajectory() : Trajectory(){
     _R = 0.0;
 }
 
-CircularTrajectory::CircularTrajectory( Vector& n, double R, double V, Point& p0 ) : Trajectory(p0,V){
+CircularTrajectory::CircularTrajectory( const Vector& n, double R, double V, const Point& p0, double t0 ) : Trajectory(p0,V, t0){
     _n = n;
     _R = R;
     double phi = acos( n.k() );
@@ -20,5 +20,6 @@ CircularTrajectory::CircularTrajectory( Vector& n, double R, double V, Point& p0
 }
 
 Point CircularTrajectory::p( double t ) const{
-    return Point( _u * _R * cos( _V * t ) + _v * _R * sin( _V * t ) + _p0 );
+    double t1 = t + _t0;
+    return Point( _u * _R * cos( _V * t1 * 2 * PI) + _v * _R * sin( _V * t1 * 2 * PI ) + _p0 );
 }

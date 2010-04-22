@@ -72,6 +72,7 @@ HEADERS += tools/tools.h \
     trajectories/lineartrajectory.h \
     trajectories/circulartrajectory.h \
     orientations/orientation.h \
-    orientations/trackingorientation.h
+    orientations/trackingorientation.h \
+    sowiloexception.h
 QMAKE_CXXFLAGS_RELEASE += -fopenmp
 QMAKE_LFLAGS_RELEASE += -fopenmp

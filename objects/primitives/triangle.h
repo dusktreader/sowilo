@@ -21,7 +21,7 @@ protected:
 
 public:
     Triangle();
-    Triangle( Point &p0, Point &p1, Point &p2, Material* mat, Trajectory *traj, Orientation* ornt );
+    Triangle( const Point &p0, const Point &p1, const Point &p2, Material* mat, Trajectory *traj, Orientation* ornt );
     virtual ~Triangle(){}
 
     virtual Vector n( const Point &p, double t );

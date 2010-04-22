@@ -10,6 +10,8 @@
 #include <iomanip>
 #include <exception>
 
+#include <omp.h>
+
 /** OS specific flags and etcetera */
 #ifdef WIN32
 #define OS_SEP_STR "\\"
@@ -101,6 +103,11 @@ extern int callDepth;
                                  op << __FILE__ ":" << __LINE__ << " :"; \
                                  printVar( var, #var, op ); \
                                  cout << op.str() << flush; }
+/** Prints the file name, line and a message if a condition is true
+  * @param  cnd - The condition to test
+  * @param  msg - The message to print
+  */
+#define DB_REP_CND( cnd, msg ) if(cnd) { std::cout << __FILE__ ":" << __LINE__ << " : messsage:" << (msg) << std::endl; }
 
 /** Prints the file, line, list name, and list values
   * @param  list - The list to print
@@ -109,7 +116,43 @@ extern int callDepth;
 #define DB_REP_LIST( list, l ) { std::ostringstream op; \
                                  op << __FILE__ ":" << __LINE__ << " : "; \
                                  printList( list, l, #list, op ); \
-                                 cout << op.str() << flush; }
+                                 std::cout << op.str() << std::flush; }
+
+/** Prints the file, line, and thread# */
+#define DB_REP_OMP               _Pragma( "omp critical" ){ \
+                                 std::ostringstream op; \
+                                 op << __FILE__ ":" << __LINE__ << ": "; \
+                                 op << "thread #" << omp_get_thread_num() << " reporting"; \
+                                 std::cout << op.str() << std::endl; }
+
+/** Prints the file, line, thread#, and a message
+  * @param  msg - The message to print
+  */
+#define DB_REP_OMP_MSG( msg )    _Pragma( "omp critical" ){ \
+                                 std::ostringstream op; \
+                                 op << __FILE__ ":" << __LINE__ << ":"; \
+                                 op << "thread #" << omp_get_thread_num() << ": message: " << msg; \
+                                 std::cout << op.str() << std::endl; }
+
+/** Prints the file, line, thread#, variable name, and variable value
+  * @param  var - The variable to report
+  */
+#define DB_REP_OMP_VAR( var )    _Pragma( "omp critical" ){ \
+                                 std::ostringstream op; \
+                                 op << __FILE__ ":" << __LINE__ << ": "; \
+                                 op << "thread #" << omp_get_thread_num() << ": "; \
+                                 printVar( var, #var, op ); \
+                                 std::cout << op.str() << std::flush; }
+
+/** Prints the file, line, thread#, variable name, and variable value
+  * @param  var - The variable to report
+  */
+#define DB_REP_OMP_LIST( list, l ) _Pragma( "omp critical" ){ \
+                                   std::ostringstream op; \
+                                   op << __FILE__ ":" << __LINE__ << ": "; \
+                                   op << "thread #" << omp_get_thread_num() << ": "; \
+                                   printList( list, l, #list, op ); \
+                                   std::cout << op.str() << std::flush; }
 
 /** A custom exception that is thrown when a local ASSERT fails */
 class LocalAssert: public std::exception{
