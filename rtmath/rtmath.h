@@ -16,10 +16,6 @@
 
 class Vector;
 
-void calcRotateMat( const Vector& v, const Vector& w, double R[] );
-
-void rotateVect( const Vector& v, Vector& w, const double R[], bool reversed=false );
-
 Vector reflect( const Vector& n, const Vector& e );
 
 Vector refract( const Vector& n, const Vector& e, double nRefrI, double nRefrT );

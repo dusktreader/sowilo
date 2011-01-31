@@ -11,4 +11,5 @@ public:
     virtual ~Orientation(){}
     Orientation( const Vector& d0 );
     virtual Vector d( double t );
+    Vector d0();
 };

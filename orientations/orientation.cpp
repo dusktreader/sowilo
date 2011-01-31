@@ -15,3 +15,7 @@ Vector Orientation::d( double ){
     return _d0;
 }
 
+Vector Orientation::d0 ()
+{
+    return _d0;
+}

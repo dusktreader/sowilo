@@ -45,7 +45,8 @@ SOURCES += camera_test.cpp \ # rtmath_test.cpp \
     trajectories/lineartrajectory.cpp \
     trajectories/circulartrajectory.cpp \
     orientations/orientation.cpp \
-    orientations/trackingorientation.cpp
+    orientations/trackingorientation.cpp \
+    rtmath/rotationmatrix.cpp
 HEADERS += tools/tools.h \
     rtmath/triple.h \
     rtmath/color.h \
@@ -73,6 +74,7 @@ HEADERS += tools/tools.h \
     trajectories/circulartrajectory.h \
     orientations/orientation.h \
     orientations/trackingorientation.h \
-    sowiloexception.h
+    sowiloexception.h \
+    rtmath/rotationmatrix.h
 QMAKE_CXXFLAGS_RELEASE += -fopenmp
 QMAKE_LFLAGS_RELEASE += -fopenmp
