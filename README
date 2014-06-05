@@ -1,0 +1,12 @@
+This is a clone of a subversion project I had hosted on Google Code.
+
+I will update this README...eventually
+---
+
+  Sowilo is the shield of the clouds
+  and shining ray
+  and destroyer of ice.
+  
+Sowilo is the name of rune in the Elder Futhark runic alphabet. It signifies the Sun and the caster of shining rays.
+
+This ray tracer is an extension of a student project that I created in my graduate level Advanced Computer Graphics class. However, from the outset, I wanted to create a ray tracer that had objects that moved along mathematically defined paths. So, the position of each object is determined by a parametric function of time. Additionally, the objects will also be allowed an orientation that is either itself a parametric function, or is derived from the relationship of one or more parametric trajectories. Because this project is focusing more on mathematical purity, performance is not a primary goal. However, OpenMP is used in the source code to improve running time with parallelism.
